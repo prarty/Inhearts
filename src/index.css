@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: rgb(255, 255, 255);
+}
+
+@keyframes changeColor {
+  0% { color: var(--color-gradient1); }
+  25% { color: var(--color-gradient2); }
+  50% { color: var(--color-gradient3); }
+  75% { color: var(--color-gradient4); }
+  100% { color: var(--color-gradient1); }
+}
+
+.text-gradient {
+  --color-gradient1: #FF6347;
+  --color-gradient2: #FFD700;
+  --color-gradient3: #20B2AA;
+  --color-gradient4: #9370DB;
+  animation-name: changeColor;
+  animation-duration: 5s; /* Set the desired duration */
+  animation-iteration-count: infinite;
+}
+
+/*@font-face {*/
+/*  font-family: 'AmazingFont';*/
+/*  src: url('/fonts/AmazingFont-Regular.woff2') format('woff2'),*/
+/*  url('/fonts/AmazingFont-Regular.woff') format('woff');*/
+/*  font-weight: normal;*/
+/*  font-style: normal;*/
+/*}*/

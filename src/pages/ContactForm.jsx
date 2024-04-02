@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import {useState} from 'react';
+import emailjs from "emailjs-com";
 
 const ContactForm = () => {
-    const [formData, setFormData] = useState({
+    let initialData = {
         name: '',
         contact: '',
         location: 'Mumbai',
@@ -9,10 +10,13 @@ const ContactForm = () => {
         email: '',
         details: '',
         budget: '1-3L',
-    });
+    };
+    const [formData, setFormData] = useState({...initialData});
+    const [submitted, setSubmitted] = useState(false);
+    const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
@@ -21,27 +25,63 @@ const ContactForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
+        const newErrors = {};
+        if (formData.name.trim() === '' || formData.email.trim() === '' || formData.contact.trim() === '' ||
+            formData.budget.trim() === '' || formData.location.trim() === '' || formData.date.trim() === '') {
+            newErrors.name = 'All the details are mandatory. Please fill the details';
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
+
+        const templateParams = {
+            from_name: formData.name,
+            from_email: formData.email,
+            phone: formData.contact,
+            event_date: formData.date,
+            budget: formData.budget,
+            location: formData.location,
+            details: formData.details
+        };
+
+        emailjs.send('service_6nrn2jg', 'template_k4jbrcl', templateParams, 'Xm9YLFPU1F2VZD0XM')
+            .then(() => {
+                setSubmitted(true);
+                setFormData(initialData);
+            })
+            .catch((error) => {
+                console.error('Error sending email:', error);
+            });
     };
 
     return (
         <div className="flex justify-center pt-10 mt-16 bg-gradient-to-b from-gray-200 to-white">
-            <form onSubmit={handleSubmit}>
-                <section className="bg-coolGray-50 py-4">
-                    <div className="container px-4 mx-auto">
-                        <div className="flex flex-wrap -m-3 mb-3">
-                            <div className="w-full md:w-1/4 p-3">
-                                <h2 className="text-coolGray-900 text-lg font-semibold">Personal info</h2>
-                                <p className="text-xs text-coolGray-500 font-medium">At Inhearts Event Planner, we redefine event experiences with
-                                    creativity, precision, and passion.
-                                    Our expert team brings dreams to life, crafting unforgettable moments
-                                    that surpass expectations. Let us transform your
-                                    vision into reality and make your event a masterpiece of memories.
-                                    Experience excellence with us today!</p>
-                            </div>
-                            <div className="w-full md:w-3/4 p-3">
-                                <div
-                                    className="p-6 h-full border border-coolGray-100 overflow-hidden bg-white rounded-md shadow-dashboard">
+
+            <section className="bg-coolGray-50 py-4">
+                <div className="container px-4 mx-auto">
+                    <div className="flex flex-wrap -m-3 mb-3">
+                        <div className="w-full md:w-1/4 p-3">
+                            <h2 className="text-coolGray-900 text-lg font-semibold">Personal info</h2>
+                            <p className="text-sm text-coolGray-500 font-medium">At Inhearts Event Planner, we
+                                redefine event experiences with
+                                creativity, precision, and passion.
+                                Our expert team brings dreams to life, crafting unforgettable moments
+                                that surpass expectations. Let us transform your
+                                vision into reality and make your event a masterpiece of memories.
+                                Experience excellence with us today!</p>
+                        </div>
+                        <div className="w-full md:w-3/4 p-3">
+                            {submitted ? (
+                                    <div className="mt-20 flex justify-center items-top h-screen animate-pulse">
+                                        <h2 className="text-3xl font-semibold text-green-700">Thank You for Your
+                                            Submission!</h2>
+                                    </div>
+                                ) :
+                                (<form onSubmit={handleSubmit}>
+                                    <div
+                                        className="p-6 h-full border border-coolGray-100 overflow-hidden bg-white rounded-md shadow-dashboard">
                                     <div className="flex flex-wrap pb-3 -m-3">
                                         <div className="w-full md:w-1/2 p-3">
                                             <p className="mb-1.5 font-medium text-base text-coolGray-800">Name</p>
@@ -108,7 +148,8 @@ const ContactForm = () => {
                                             </div>
                                         </div>
                                         <div className="w-full md:w-1/2 p-3">
-                                            <p className="mb-1.5 font-medium text-base text-coolGray-800">Event Date</p>
+                                            <p className="mb-1.5 font-medium text-base text-coolGray-800">Event
+                                                Date</p>
                                             <input
                                                 className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
                                                 type="date" placeholder="eventDate"
@@ -156,27 +197,30 @@ const ContactForm = () => {
                                                 name="details"
                                             />
                                         </div>
+                                        {errors.name &&
+                                            <p className="text-red-500 text-base mt-1">{errors.name}</p>}
+
                                         <button type="submit"
                                                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                             Submit
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </form>)}
                         </div>
                     </div>
-                </section>
-            </form>
-
-                <div className="ml-8">
-                    <h2 className="text-lg font-semibold mb-2">Inhearts Event Planner</h2>
-                    <p className="text-sm">Email: inheartseventinfo@gmail.com</p>
-                    <p className="text-sm">Address: Runwal gardens, Kalyan, Mumbai Maharashtra</p>
-                    <p className="text-sm">Lohegaon, Pune, Maharashtra</p>
-                    <p className="text-sm">Babatpur, Varanasi, UttarPradesh</p>
                 </div>
+            </section>
+
+            <div className="ml-8 p-3">
+                <h2 className="text-lg font-semibold mb-2">Inhearts Event Planner</h2>
+                <p className="text-sm">Email: inheartseventinfo@gmail.com</p>
+                <p className="text-sm">Address: Runwal gardens, Kalyan, Mumbai Maharashtra</p>
+                <p className="text-sm">Lohegaon, Pune, Maharashtra</p>
+                <p className="text-sm">Babatpur, Varanasi, UttarPradesh</p>
+            </div>
         </div>
-);
+    );
 };
 
 export default ContactForm;

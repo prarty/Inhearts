@@ -66,10 +66,10 @@ const QuickEnquiryForm = () => {
         dispatch(closeForm()) // Close the form after submission
     };
     return (
-        <div className="relative">
+        <div>
             {isFormOpen && (
                 <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-                    <div className="bg-white p-8 max-w-xl w-full rounded-lg shadow-lg text-black">
+                    <div className="bg-white p-8 w-full max-w-md mx-auto rounded-lg shadow-lg text-black">
                         <h2 className="text-3xl font-semibold mb-4 text-center text-gray-900">Quick Enquiry Form</h2>
                         <div
                             className="bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 max-w-xl w-full p-6 rounded-md shadow-md">

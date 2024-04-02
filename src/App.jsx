@@ -20,7 +20,7 @@ export default function App() {
                     <Route path={"/contact-us"} element={<ContactForm />}/>
                     <Route path={"/"} element={<Home/>}/>
                 </Routes>
-                {/*<Footer />*/}
+                <Footer />
             </BrowserRouter>
         </div>
     );

@@ -5,7 +5,6 @@ import {openForm} from "../redux/form/formSlice.js";
 import HeadingBar from "../components/Heading.jsx";
 import Location from "./Location.jsx";
 import CircularLoader from "../components/ProcessFlow.jsx";
-import Footer from "../components/Footer.jsx";
 import Reviews from "../components/Reviews.jsx";
 
 export default function Home() {
@@ -17,7 +16,7 @@ export default function Home() {
     };
 
     return (
-        <div className="relative h-screen overflow pt-20 overflow-x-hidden">
+        <div className="relative h-screen overflow pt-16 overflow-x-hidden">
             <BackgroundCarousel/>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
                 <div
@@ -44,8 +43,7 @@ export default function Home() {
             <Location/>
             <HeadingBar title={"Plan Your Event With Us"}/>
              <CircularLoader/>
-                <Reviews/>
-             <Footer/>
+             <Reviews/>
             </div>
         </div>
     )

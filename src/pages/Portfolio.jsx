@@ -1,4 +1,3 @@
-import React from 'react'
 import Heading from "../components/Heading.jsx";
 import PhotoGrid from "../components/PhotoGrid.jsx";
 

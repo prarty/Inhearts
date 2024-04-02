@@ -6,6 +6,7 @@ import HeadingBar from "../components/Heading.jsx";
 import Location from "./Location.jsx";
 import CircularLoader from "../components/ProcessFlow.jsx";
 import Reviews from "../components/Reviews.jsx";
+import {useEffect} from "react";
 
 export default function Home() {
     const { isFormOpen } = useSelector(state => state.form.form)
@@ -15,6 +16,13 @@ export default function Home() {
         dispatch(openForm())
     };
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            dispatch(openForm())
+        }, 1000); // Show form after 10 seconds (10000 milliseconds)
+
+        return () => clearTimeout(timer);
+    }, [dispatch]);
     return (
         <div className="relative h-screen overflow pt-16 overflow-x-hidden">
             <BackgroundCarousel/>

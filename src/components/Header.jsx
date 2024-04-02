@@ -19,30 +19,30 @@ export default function Header() {
                 <ul className="hidden lg:flex lg:w-auto lg:space-x-12 items-center">
                     <li className="group relative">
                         <Link to="/"
-                              className="inline-block text-sm text-gray-900 hover:text-orange-900 font-medium">Home</Link>
+                              className="inline-block md:text-lg text-gray-900 hover:text-orange-900 font-medium">Home</Link>
                         <div className="hidden group-hover:block absolute top-full left-0 min-w-max max-w-xs p-4 z-30">
                             {/* Dropdown content */}
                         </div>
                     </li>
                     <li>
                         <Link to="/services"
-                              className="inline-block text-sm text-gray-900 hover:text-orange-900 font-medium">Services</Link>
+                              className="inline-block md:text-lg text-gray-900 hover:text-orange-900 font-medium">Services</Link>
                     </li>
                     <li>
                         <Link to="/portfolio"
-                              className="inline-block text-sm text-gray-900 hover:text-orange-900 font-medium">Portfolio</Link>
+                              className="inline-block md:text-lg text-gray-900 hover:text-orange-900 font-medium">Portfolio</Link>
                     </li>
                     <li>
                         <Link to="/about"
-                              className="inline-block text-sm text-gray-900 hover:text-orange-900 font-medium">About
+                              className="inline-block md:text-lg text-gray-900 hover:text-orange-900 font-medium">About
                             Us</Link>
                     </li>
                 </ul>
                 <div className="hidden lg:block ml-auto">
                     <div className="flex items-center">
                         <span
-                              className="inline-block mr-9 text-sm font-semibold text-orange-900 hover:text-gray-900">+91 798434312849</span>
-                        <Link to="/contact-us" className="relative group inline-block py-3 px-4 text-sm font-semibold text-orange-50 bg-orange-900 rounded-md overflow-hidden">
+                              className="inline-block mr-9 md:text-lg font-semibold text-orange-900 hover:text-gray-900">+91 798434312849</span>
+                        <Link to="/contact-us" className="relative group inline-block py-3 px-4 md:text-lg font-semibold text-orange-50 bg-orange-900 rounded-md overflow-hidden">
                             <div className="absolute top-0 right-full w-full h-full bg-gray-900 transform group-hover:translate-x-full group-hover:scale-102 transition duration-500"></div>
                             <span className="relative">Contact Us</span>
                         </Link>
